@@ -84,7 +84,7 @@ gulp.task('scripts', ()=> {
 
 
 // ヘッダー・フッターインクルード
-gulp.task("fileinclude", function() {
+gulp.task("fileinclude", ()=> {
   gulp.src(['./src/**/*.html','!./src/_inc/**/*.html'])
     .pipe(plumber())
     .pipe(fileinclude({
