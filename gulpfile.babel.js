@@ -140,10 +140,9 @@ gulp.task('encord', ()=>{
   .pipe(replace('UTF-8', 'Shift_JIS'))
   .pipe(convertEncoding({to: 'Shift_JIS'}))
   .pipe(gulp.dest(DIR.release+'css/'));
-});
-// jsファイルのコピー
-gulp.task('copyJS', ()=>{
+  // js
   gulp.src(DIR.dest+'js/**/*')
+  .pipe(convertEncoding({to: 'Shift_JIS'}))
   .pipe(gulp.dest(DIR.release+'js/'));
 });
 // imgファイルのコピー
@@ -155,7 +154,7 @@ gulp.task('copyImg', ()=>{
 // ↑タスクを直列で実行
 gulp.task('release', ()=>{
   runSequence(
-    ['copyJS','copyImg'],
+    'copyImg',
     'encord'
   )
 });
