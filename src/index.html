@@ -5,13 +5,16 @@
   <title>Document</title>
 
   @@include('./_inc/head.html')
-  <script type="text/javascript" src="/assets/js/script.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
   @@include('./_inc/header.html')
   <!--========== start div#smplLdanding ==========-->
   <div id="smplLanding">
-
+    <a href="#hoge" class="js-smooth">hogeへページ内スクロール</a>
+    <div id="hoge" style="margin-top:1200px;height:500px;">
+      hogeコンテンツ
+    </div>
   </div>
   <!--========== end div#smplLdanding ==========-->
   @@include('./_inc/footer.html')
