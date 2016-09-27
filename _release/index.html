@@ -3,7 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <script type="text/javascript" src="/assets/js/script.js"></script>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/script.js" async></script>
+
+  <link rel="apple-touch-icon" href="/assets/img/common/common-touchicon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- OGP -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="指定されたog:titleをいれてください">
+  <meta property="og:url" content="指定されたog:titleをいれてください">
+  <meta property="og:site_name" content="指定されたog:site_nameをいれてください">
+  <meta property="og:description" content="指定されたog:descriptionをいれてください">
+  <meta property="og:image" content="指定されたog:imageをいれてください">
+
+  <!-- ランディングページ読み込み時にjavascriptで加えられるcss -->
+  <link rel="stylesheet" href="css/default/mac/mac01.css">
+  <link rel="stylesheet" href="css/default/win/win01.css">
+
+  <!-- 仮でjQueryおく -->
+  <script type="text/javascript" src="http://store.wacoal.jp/js/jquery-1.7.1.min.js"></script>
+
+  <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
   <header class="header">
@@ -12,7 +38,10 @@
 
   <!--========== start div#smplLdanding ==========-->
   <div id="smplLanding">
-    
+    <a href="#hoge" class="js-smooth">hogeへページ内スクロール</a>
+    <div id="hoge" style="margin-top:1200px;height:500px;">
+      hogeコンテンツ
+    </div>
   </div>
   <!--========== end div#smplLdanding ==========-->
   <footer class="footer">
