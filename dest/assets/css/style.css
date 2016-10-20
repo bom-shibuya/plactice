@@ -1,0 +1,86 @@
+/*! compiled at:2016-10-20 153650 */
+@charset 'UTF-8';html {
+  font-size: 10px;
+}body {
+  width: 100%;
+  color: #fff;
+  text-align: left;
+  font-size: 2rem;
+  font-weight: 400;
+  font-family: '游ゴシック',Yu Gothic,'游ゴシック体',YuGothic,'ヒラギノ角ゴ Pro W3',Hiragino Kaku Gothic Pro,Meiryo UI,'メイリオ',Meiryo,'ＭＳ Ｐゴシック',MS PGothic,sans-serif;
+  line-height: 1.6;
+  letter-spacing: .07em;
+  -webkit-font-smoothing: antialiased;
+}* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}a {
+  color: #fff;
+  transition: opacity .4s;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}a:hover {
+  opacity: .6;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=60)';
+}img {
+  max-width: 100%;
+}ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}ul ul {
+  margin-left: 0;
+}dt {
+  font-weight: 700;
+}dd {
+  margin-left: 0;
+}ol {
+  list-style: none;
+  list-style-position: inside;
+}small,span {
+  vertical-align: baseline;
+}.hide {
+  display: none;
+}.clearfix:after {
+  clear: both;
+  content: '';
+  display: block;
+}.left {
+  float: left;
+}.right {
+  float: right;
+}.alignLeft {
+  text-align: left;
+}.alignCenter {
+  text-align: center;
+}.alignRight {
+  text-align: right;
+}.weightBold {
+  font-weight: 700;
+}.section {
+  padding: 4rem;
+}.section.mod-01 {
+  background: url(https://unsplash.it/2000/1500?image=999) center center no-repeat;
+  background-size: cover;
+}.section.mod-02 {
+  background: url(https://unsplash.it/2000/1500?image=989) center center no-repeat;
+  background-size: cover;
+}.section.mod-03 {
+  background: url(https://unsplash.it/2000/1500?image=979) center center no-repeat;
+  background-size: cover;
+}.section.mod-04 {
+  background: url(https://unsplash.it/2000/1500?image=969) center center no-repeat;
+  background-size: cover;
+}.section.mod-05 {
+  background: url(https://unsplash.it/2000/1500?image=959) center center no-repeat;
+  background-size: cover;
+}.section.mod-06 {
+  background: url(https://unsplash.it/2000/1500?image=949) center center no-repeat;
+  background-size: cover;
+}.content {
+  width: 80%;
+  height: 30vh;
+  background-color: rgba(255,255,255,.9);
+  margin: 0 auto 4rem;
+}

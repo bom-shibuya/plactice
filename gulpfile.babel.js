@@ -8,21 +8,23 @@ import fileinclude from 'gulp-file-include'; // ファイルのインクルー�
 import plumber from 'gulp-plumber'; // エラー起きてもこけない
 import runSequence from 'run-sequence'; // タスクの処理順序の担保
 import replace from 'gulp-replace'; // 置換
-import convertEncoding from 'gulp-convert-encoding'; // 文字コード変換
 
-import concat from 'gulp-concat'; // ファイル結合(jsで使用)
 import imagemin from 'gulp-imagemin'; // 画像圧縮
 import sass from 'gulp-sass'; // sassからcss
 import please from "gulp-pleeease"; // クロスブラウザとかを良しなにしてくれる
 import csscomb from 'gulp-csscomb'; // cssを綺麗にしてくれる
-
+import gutil from 'gulp-util'; // これは何か。プラグインがなんかあった時に教えてくれたりする何かなのかな？
+import webpack from 'gulp-webpack'; // js関係のことを今回やらせます。
+import webpackConfig from './webpack.config.js'; // webpackの設定ファイル
 
 
 ////////// Directory
 const DIR = {
-  src:  './src/',
-  dest: './dest/',
-  release: './_release/'
+  src:  'src/',
+  dest: 'dest/',
+  srcAssets:  'src/assets/',
+  destAssets: 'dest/assets/',
+  release: '_release/'
 }
 
 ////////// 現在時刻
@@ -52,7 +54,7 @@ gulp.task('browserSync', ()=> {
 
 // sass
 gulp.task('sass', ()=> {
-  return gulp.src(DIR.src+'sass/**/*.{sass,scss}')
+  return gulp.src(DIR.srcAssets+'sass/**/*.{sass,scss}')
   .pipe(plumber())
   .pipe(sass({outputStyle: ':expanded'})
   .on('error', sass.logError))
@@ -61,31 +63,30 @@ gulp.task('sass', ()=> {
       browsers: ['last 4 versions', 'last 4 ios_saf versions']
     },
     sass: false,
-    minifier: false, //if env not minify
+    // minifier: false, //if env not minify
     rem: false,
     pseudoElements: false,
     mqpacker: true
   }))
   .pipe(csscomb())
   .pipe(insert.prepend('/*! compiled at:'+fmtdDate+' */\n'))
-  .pipe(gulp.dest(DIR.dest+'css/'))
+  .pipe(gulp.dest(DIR.destAssets+'css/'))
   .pipe(browserSync.stream());
 });
 
 // js conat
-gulp.task('scripts', ()=> {
-  return gulp.src(DIR.src+'js/**/*.js')
-    .pipe(plumber())
-    .pipe(concat('script.js'))
-    .pipe(insert.prepend('/*! bundled at:'+fmtdDate+' */\n'))
-    .pipe(gulp.dest(DIR.dest+'js'))
+gulp.task('scripts', () => {
+    return gulp.src(DIR.srcAssets + 'js/*.js')
+    .pipe(webpack(webpackConfig))
+    .pipe(gulp.dest(DIR.destAssets + 'js'))
     .pipe(browserSync.stream());
+
 });
 
 
 // ヘッダー・フッターインクルード
 gulp.task("fileinclude", ()=> {
-  gulp.src(['./src/**/*.html','!./src/_inc/**/*.html'])
+  gulp.src([DIR.src + '**/*.html',!DIR.src +'src/_inc/**/*.html'])
     .pipe(plumber())
     .pipe(fileinclude({
       prefix: '@@',
@@ -97,18 +98,18 @@ gulp.task("fileinclude", ()=> {
 
 // imageMin
 gulp.task('imageMin', ()=> {
-  return gulp.src(DIR.src+'img/**/*')
+  return gulp.src(DIR.srcAssets+'img/**/*')
   .pipe(imagemin())
-  .pipe(gulp.dest(DIR.dest+'img/'))
+  .pipe(gulp.dest(DIR.destAssets+'img/'))
   .pipe(browserSync.stream());
 });
 
 // watch
 gulp.task('watch', ()=> {
-  gulp.watch('./src/**/*.html', ['fileinclude']);
-  gulp.watch(DIR.src+'sass/**/*.{sass,scss}', ['sass']);
-  gulp.watch(DIR.src+'js/**/*.js', ['scripts']);
-  gulp.watch(DIR.src+'img/**/*', ['imageMin']);
+  gulp.watch(DIR.src+ '**/*.html', ['fileinclude']);
+  gulp.watch(DIR.srcAssets+'sass/**/*.{sass,scss}', ['sass']);
+  gulp.watch(DIR.srcAssets+'js/**/*.js', ['scripts']);
+  gulp.watch(DIR.srcAssets+'img/**/*', ['imageMin']);
 });
 
 // clean
@@ -129,32 +130,11 @@ gulp.task('default', ()=> {
 
 ////////// upload用を生成
 
-// エンコーディング
-gulp.task('encord', ()=>{
-  // html
-  gulp.src(DIR.dest+'**/*.html')
-  .pipe(convertEncoding({to: 'Shift_JIS'}))
-  .pipe(gulp.dest(DIR.release));
-  // css 置換 && エンコード
-  gulp.src(DIR.dest+'css/**/*.css')
-  .pipe(replace('UTF-8', 'Shift_JIS'))
-  .pipe(convertEncoding({to: 'Shift_JIS'}))
-  .pipe(gulp.dest(DIR.release+'css/'));
-  // js
-  gulp.src(DIR.dest+'js/**/*')
-  .pipe(convertEncoding({to: 'Shift_JIS'}))
-  .pipe(gulp.dest(DIR.release+'js/'));
-});
-// imgファイルのコピー
-gulp.task('copyImg', ()=>{
-  gulp.src(DIR.dest+'img/**/*')
-  .pipe(gulp.dest(DIR.release+'img/'));
-});
 
-// ↑タスクを直列で実行
-gulp.task('release', ()=>{
-  runSequence(
-    'copyImg',
-    'encord'
-  )
-});
+
+// // ↑タスクを直列で実行
+// gulp.task('release', ()=>{
+//   runSequence(
+//     'copyImg',
+//   )
+// });

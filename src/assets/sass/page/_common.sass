@@ -1,0 +1,87 @@
+html
+  font-size: 10px
+
+body
+  width: 100%
+  color: $text
+  text-align: left
+  font-size: 2rem
+  font-weight: normal
+  font-family: $sans-serif
+  line-height: 1.6
+  letter-spacing: 0.07em
+  -webkit-font-smoothing: antialiased
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+a
+  color: $text
+  transition: opacity 0.4s
+  text-decoration: none
+  -webkit-tap-highlight-color: rgba(0,0,0,0.0)
+  &:hover
+    opacity: 0.6
+
+img
+  max-width: 100%
+
+ul
+  list-style-type: none
+  padding: 0
+  margin: 0
+
+ul ul
+  margin-left: 0
+
+dt
+  font-weight: bold
+
+dd
+  margin-left: 0
+
+ol
+  list-style: none
+  list-style-position: inside
+
+small,span
+  // display: inline-block
+  vertical-align: baseline
+
+
+// hide
+.hide
+  display: none
+
+// clearfix
+.clearfix
+  &:after
+    clear: both
+    content: ""
+    display: block
+
+// float LEFT
+.left
+  float: left
+
+// float RIGHT
+.right
+  float: right
+
+//text-align LEFT
+.alignLeft
+  text-align: left
+
+//text-align CENTER
+.alignCenter
+  text-align: center
+
+//text-align RIGHT
+.alignRight
+  text-align: right
+
+//font-weight BOLD
+.weightBold
+  font-weight: 700
