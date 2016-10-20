@@ -1,8 +1,11 @@
-import ScrollMagic from 'scrollmagic';
 import TweenMax from 'TweenMax';
+import TimelineLite from 'TimelineLite';
+import ScrollMagic from 'ScrollMagic';
+import 'animation.gsap';
+import 'debug.addIndicators';
 
 
-$(function(){
+$(function() {
 
   // // smoothscroll
   // $('.js-smooth').on('click', function(e) {
@@ -12,14 +15,28 @@ $(function(){
   //     scrollTop: _targetTop
   //   }, 'normal');
   // });
-  console.log(TweenMax);
-  var tweenTarget = document.querySelector('.js-section02');
-  TweenMax.to( tweenTarget,2,{
-  opacity : 0
+
+
+
+  var timelineLite = new TimelineLite();
+
+  var tweenparent = $('.js-section03');
+  var tweenchild = tweenparent.children('.content');
+  console.log(tweenchild);
+  var controller = new ScrollMagic.Controller();
+  var scene = new ScrollMagic.Scene({
+      triggerHook: 0,
+      triggerElement: ".js-section03",
+      duration: 5000,
+    })
+    .setPin(".js-section03") // pins the element for the the scene's duration
+    .addIndicators()
+    .addTo(controller); // assign the scene to the controller
+
+  scene.on('progress', function(){
+    timelineLite.to(tweenchild,2 ,{
+      background: '#000'
+    })
   });
 
-
 });
-
-window.onload = function(){
-}
