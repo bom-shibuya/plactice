@@ -42,6 +42,9 @@
     "gsap": "^1.19.0",
     "gulp-webpack": "^1.5.0",
     "jquery": "^2.2.4",
-    "scrollmagic": "^2.0.5"
+    "scrollmagic": "^2.0.5",
+    "snapsvg": "^0.4.0",
+    "snapsvg-cjs": "0.0.4",
+    "vivus": "^0.3.2"
   }
 }
